@@ -12,10 +12,6 @@
   and verified with <strong>ModelSim</strong> waveform simulation — following the same RTL workflow used in professional ASIC and FPGA development.
 </p>
 
-<p align="center">
-  <strong>Saintgits College of Engineering — B.Tech Major Project</strong>
-</p>
-
 ---
 
 ## 🎯 Overview
@@ -122,7 +118,3 @@ Cin → [FA0] → [FA1] → [FA2] → ... → [FA31] → Cout
 | Target | FPGA |
 
 ---
-
-## 📄 License
-
-This project is for educational purposes as part of B.Tech Major Project at **Saintgits College of Engineering**.
