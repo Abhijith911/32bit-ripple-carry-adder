@@ -1,94 +1,128 @@
-# 32-bit Ripple Carry Adder (Verilog HDL)
+# 🔢 32-bit Ripple Carry Adder in Verilog HDL
 
-This project implements a 32-bit Ripple Carry Adder (RCA) using Verilog HDL.  
-It includes design, simulation, testbench verification, and FPGA synthesis analysis.
+<p align="center">
+  <img src="https://img.shields.io/badge/Language-Verilog%20HDL-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Tool-Intel%20Quartus%20Prime-lightblue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Simulation-ModelSim-green?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Design-RTL%20%2F%20FPGA-orange?style=for-the-badge"/>
+</p>
 
----
+<p align="center">
+  A 32-bit Ripple Carry Adder designed in <strong>Verilog HDL</strong>, synthesized in <strong>Intel Quartus Prime</strong>,<br/>
+  and verified with <strong>ModelSim</strong> waveform simulation — following the same RTL workflow used in professional ASIC and FPGA development.
+</p>
 
-## 1. Introduction
-
-A Ripple Carry Adder adds two binary numbers using a chain of 1-bit full adders.  
-Each stage waits for the carry from the previous stage, producing the characteristic "ripple" delay.
-
-This project covers:
-- Verilog-based RCA design  
-- Simulation and waveform verification  
-- RTL and technology schematic generation  
-- FPGA resource utilization analysis
-
----
-
-## 2. Design Methodology
-
-### Ripple Carry Adder Overview
-- The 32-bit RCA is constructed from **32 full-adder modules**.  
-- Each full adder takes inputs (A, B, Cin) and produces (Sum, Cout).  
-- Carry propagates from the least significant bit (LSB) to the most significant bit (MSB).
-
-### Architecture
-
-FA0 -> FA1 -> FA2 -> ... -> FA31
-
-
-- FA0 receives external carry-in (Cin = 0)  
-- FA31 produces the final carry-out (Cout)
+<p align="center">
+  <strong>Saintgits College of Engineering — B.Tech Major Project</strong>
+</p>
 
 ---
 
-## 3. Testbench and Simulation
+## 🎯 Overview
+
+A Ripple Carry Adder adds two binary numbers using a chain of 1-bit full adders. Each stage waits for the carry output from the previous stage, producing the characteristic "ripple" delay from LSB to MSB.
+
+| Property | Details |
+|---|---|
+| Design | 32-bit Ripple Carry Adder |
+| Language | Verilog HDL |
+| Synthesis Tool | Intel Quartus Prime |
+| Simulation | ModelSim |
+| Circuit Type | Purely combinational (no flip-flops) |
+
+---
+
+## 🏗️ Architecture
+
+The 32-bit RCA is built from **32 cascaded full-adder modules**:
+
+```
+Cin → [FA0] → [FA1] → [FA2] → ... → [FA31] → Cout
+        S0      S1      S2             S31
+```
+
+- Each full adder takes inputs **(A, B, Cin)** and produces **(Sum, Cout)**
+- **FA0** receives the external carry-in (`Cin = 0`)
+- **FA31** produces the final carry-out (`Cout`)
+- Carry propagates sequentially from LSB → MSB
+
+---
+
+## 🧪 Testbench & Simulation
 
 ### Testbench Features
-- Applies multiple test vectors  
-- Validates sum and carry-out  
-- Checks ripple delay behavior  
-- Ensures correct functioning across all 32 stages  
+- Applies multiple test vectors across all 32 stages
+- Validates sum bits and carry-out for each input combination
+- Verifies correct ripple delay behavior
+- Confirms functioning across edge cases (overflow, all-ones, etc.)
 
-### Results
-- Sum bits stabilize only after the carry finishes propagating through all stages  
-- Cout matches expected values  
-- The ripple effect is clearly observed in the waveform
-
----
-
-## 4. Synthesis (Quartus)
-
-### RTL Schematic
-- Shows all 32 full adders connected sequentially  
-- Visual representation of carry chain and sum lines  
-
-### Technology Schematic
-- Maps logic to FPGA LUTs and combinational elements  
-- Illustrates internal gate-level implementation  
+### Simulation Results
+- Sum bits stabilize only after carry finishes propagating through all 32 stages
+- `Cout` matches expected values for all test vectors
+- The ripple carry effect is clearly visible in ModelSim waveforms
 
 ---
 
-## 5. Device Utilization (FPGA)
+## 📊 FPGA Synthesis Results (Quartus Prime)
 
-Resource usage summary:
-- **Combinational ALUTs:** 63  
-- **I/O Pins:** 97  
-- **Total Fan-out:** 375  
-- **Flip-flops:** None (purely combinational circuit)
+### Device Utilization
 
----
+| Resource | Usage |
+|---|---|
+| Combinational ALUTs | 63 |
+| I/O Pins | 97 |
+| Total Fan-out | 375 |
+| Flip-flops | 0 (purely combinational) |
 
-## 6. Conclusion
-
-The 32-bit Ripple Carry Adder was successfully designed and simulated.  
-Waveforms confirmed correct functionality, and synthesis reports showed efficient resource usage.
-
-This project demonstrates understanding of:
-- Verilog structural modeling  
-- Carry propagation logic  
-- Combinational circuit design  
-- FPGA RTL and technology mapping  
+### Schematics Generated
+- **RTL Schematic** — all 32 full adders connected sequentially, showing the carry chain and sum lines
+- **Technology Schematic** — gate-level mapping to FPGA LUTs and combinational elements
 
 ---
 
-## Project Files
+## 📂 Project Structure
 
-📂 32bit-ripple-carry-adder
- ├── Verilog CODE
- ├── Testbench
- ├── 32_Bit-Ripple_Carry_Adder.docx
- └── README.md
+```
+32bit-ripple-carry-adder/
+├── ripple_carry_adder.v      # Top-level 32-bit RCA module
+├── full_adder.v              # 1-bit full adder module
+├── tb_ripple_carry_adder.v   # Testbench
+├── 32_Bit-Ripple_Carry_Adder.docx  # Full project report
+└── README.md
+```
+
+---
+
+## 🚀 How to Simulate
+
+### ModelSim
+1. Open ModelSim and create a new project
+2. Add `ripple_carry_adder.v`, `full_adder.v`, and `tb_ripple_carry_adder.v`
+3. Compile all files
+4. Run simulation on the testbench
+5. Open waveform viewer to observe carry propagation
+
+### Quartus Prime (Synthesis)
+1. Create a new Quartus project
+2. Add the Verilog source files
+3. Set `ripple_carry_adder` as the top-level entity
+4. Run **Analysis & Synthesis** to generate RTL and technology schematics
+5. View resource utilization in the **Compilation Report**
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Tool / Technology |
+|---|---|
+| HDL | Verilog |
+| Synthesis | Intel Quartus Prime |
+| Simulation | ModelSim |
+| Design Type | RTL / Combinational Logic |
+| Target | FPGA |
+
+---
+
+## 📄 License
+
+This project is for educational purposes as part of B.Tech Major Project at **Saintgits College of Engineering**.
